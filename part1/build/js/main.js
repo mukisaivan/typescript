@@ -132,3 +132,11 @@ console.log(todaysNet(todaysTransactions));
 //chaging the property of the object forexample 
 todaysTransactions.Pizza = 20;
 console.log(todaysTransactions);
+const student1 = {
+    name: 'ivan',
+    gpa: 2,
+    classes: [1, 2]
+};
+for (const key in student1) {
+    console.log(`${key}: ${student1[key]}`);
+}

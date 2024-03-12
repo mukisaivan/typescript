@@ -211,3 +211,20 @@ console.log(todaysNet(todaysTransactions));
 todaysTransactions.Pizza = 20
 console.log(todaysTransactions);
 
+////////////////
+
+interface Student {
+  name: string
+  gpa: number
+  classes?: number[]
+}
+
+const student1: Student = {
+  name: 'ivan',
+  gpa: 2,
+  classes: [1,2]
+}
+
+for (const key in student1) {
+  console.log(`${key}: ${student1[key as keyof Student]}`);
+}
