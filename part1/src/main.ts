@@ -214,6 +214,7 @@ console.log(todaysTransactions);
 ////////////////
 
 interface Student {
+  [index: string]: number | string  | number[] | undefined
   name: string
   gpa: number
   classes?: number[]
@@ -228,3 +229,4 @@ const student1: Student = {
 for (const key in student1) {
   console.log(`${key}: ${student1[key as keyof Student]}`);
 }
+
