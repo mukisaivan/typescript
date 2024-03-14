@@ -214,7 +214,7 @@ console.log(todaysTransactions);
 ////////////////
 
 interface Student {
-  [index: string]: number | string  | number[] | undefined
+  [key: string]: number | string  | number[] | undefined
   name: string
   gpa: number
   classes?: number[]
@@ -230,3 +230,35 @@ for (const key in student1) {
   console.log(`${key}: ${student1[key as keyof Student]}`);
 }
 
+Object.keys(student1).map((key) => {
+  console.log(student1[key as keyof typeof student1]);
+})
+
+
+////////////////////////////////////////////////////////////////////////////
+
+type Streams = 'salary' | 'bonus' | 'sidehustle'
+type Incomes = Record<Streams, number | string>
+
+/* means that all the streams ive mentioned above can be number or string 
+intead of 
+interface Incomes {
+  [key: number | string] : number
+}
+*/
+
+const monthlyIncomes: Incomes = {
+  salary: 500,
+  bonus: 100,
+  sidehustle: 250,
+}
+
+for (const key in monthlyIncomes) {
+  console.log(monthlyIncomes[key as keyof typeof monthlyIncomes]); 
+  // OR console.log(monthlyIncomes[key as keyof  Incomes]); 
+}
+
+//+++++++++++++++++++++++++++++++++++++++++ Generics ++++++++++++++++++++++++++++++++++++++++
+
+
+const stringEcho = <T>(abs: T): T => abs

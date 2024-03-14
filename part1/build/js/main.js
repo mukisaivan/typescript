@@ -140,3 +140,23 @@ const student1 = {
 for (const key in student1) {
     console.log(`${key}: ${student1[key]}`);
 }
+Object.keys(student1).map((key) => {
+    console.log(student1[key]);
+});
+/* means that all the streams ive mentioned above can be number or string
+intead of
+interface Incomes {
+  [key: number | string] : number
+}
+*/
+const monthlyIncomes = {
+    salary: 500,
+    bonus: 100,
+    sidehustle: 250,
+};
+for (const key in monthlyIncomes) {
+    console.log(monthlyIncomes[key]);
+    // OR console.log(monthlyIncomes[key as keyof  Incomes]); 
+}
+//+++++++++++++++++++++++++++++++++++++++++ Generics ++++++++++++++++++++++++++++++++++++++++
+const stringEcho = (abs) => abs;
