@@ -260,5 +260,22 @@ for (const key in monthlyIncomes) {
 
 //+++++++++++++++++++++++++++++++++++++++++ Generics ++++++++++++++++++++++++++++++++++++++++
 
-
+//forexmaple 
 const stringEcho = <T>(abs: T): T => abs
+
+const isObj = <T>(arg: T): boolean => {
+  const nextans = (Array.isArray(arg))
+  console.log(nextans);
+  return nextans
+}
+// isObj({name: "ivan"})
+
+const istrue = <T>(arg: T): { arg: T, is: boolean } => {
+  let answer = { arg, is: !!arg }
+  console.log(answer);
+  return answer
+}
+istrue(0 && 1)
+
+
+

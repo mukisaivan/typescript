@@ -159,4 +159,22 @@ for (const key in monthlyIncomes) {
     // OR console.log(monthlyIncomes[key as keyof  Incomes]); 
 }
 //+++++++++++++++++++++++++++++++++++++++++ Generics ++++++++++++++++++++++++++++++++++++++++
+//forexmaple 
 const stringEcho = (abs) => abs;
+const isObj = (arg) => {
+    const nextans = (Array.isArray(arg));
+    console.log(nextans);
+    return nextans;
+};
+// isObj({name: "ivan"})
+const istrue = (arg) => {
+    let answer = { arg, is: !!arg };
+    console.log(answer);
+    return answer;
+};
+istrue(0 && 1);
+console.log('some function');
+function printhellworld() {
+    console.log('hello world');
+}
+printhellworld();
