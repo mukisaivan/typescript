@@ -73,8 +73,8 @@ class Keyboardist {
     }
 }
 ///////////////////////////////////////////////////////////
-const Page = new Keyboardist('mukisa', 'keyboard');
-console.log(Page.play('hits'));
+const Page = new Keyboardist("mukisa", "keyboard");
+console.log(Page.play("hits"));
 class Peeps {
     static getCount() {
         return Peeps.count;
@@ -100,7 +100,7 @@ class Bands {
         return this.datastate;
     }
     set data(value) {
-        if (Array.isArray(value) && value.every(el => typeof el === 'string')) {
+        if (Array.isArray(value) && value.every((el) => typeof el === "string")) {
             this.datastate = value;
             return;
         }
@@ -110,16 +110,16 @@ class Bands {
     }
 }
 const MyBands = new Bands();
-MyBands.data = ['goo', 'lee', 'goo']; // -------------->setter
+MyBands.data = ["goo", "lee", "goo"]; // -------------->setter
 console.log(MyBands.data); // --------------> getter
-MyBands.data = [...MyBands.data, 'sisis'];
+MyBands.data = [...MyBands.data, "sisis"];
 console.log(MyBands.data);
 const todaysTransactions = {
     Pizza: 10,
     Books: 10,
-    Job: 20
+    Job: 20,
 };
-let prop = 'Pizza';
+let prop = "Pizza";
 console.log(todaysTransactions[prop]);
 function todaysNet(transactions) {
     let total = 0;
@@ -129,13 +129,13 @@ function todaysNet(transactions) {
     return total;
 }
 console.log(todaysNet(todaysTransactions));
-//chaging the property of the object forexample 
+//chaging the property of the object forexample
 todaysTransactions.Pizza = 20;
 console.log(todaysTransactions);
 const student1 = {
-    name: 'ivan',
+    name: "ivan",
     gpa: 2,
-    classes: [1, 2]
+    classes: [1, 2],
 };
 for (const key in student1) {
     console.log(`${key}: ${student1[key]}`);
@@ -156,25 +156,58 @@ const monthlyIncomes = {
 };
 for (const key in monthlyIncomes) {
     console.log(monthlyIncomes[key]);
-    // OR console.log(monthlyIncomes[key as keyof  Incomes]); 
+    // OR console.log(monthlyIncomes[key as keyof  Incomes]);
 }
 //+++++++++++++++++++++++++++++++++++++++++ Generics ++++++++++++++++++++++++++++++++++++++++
-//forexmaple 
+//forexmaple
 const stringEcho = (abs) => abs;
 const isObj = (arg) => {
-    const nextans = (Array.isArray(arg));
+    const nextans = Array.isArray(arg);
     console.log(nextans);
     return nextans;
 };
 // isObj({name: "ivan"})
 const istrue = (arg) => {
-    let answer = { arg, is: !!arg };
+    let answer = { arg, is: !!arg }; // !! shifts from what ever is given to either 0 or 1
     console.log(answer);
     return answer;
 };
 istrue(0 && 1);
-console.log('some function');
-function printhellworld() {
-    console.log('hello world');
+const processUser = (user) => {
+    return user;
+};
+console.log(processUser({ id: 1, name: "ivan" }));
+//in the above the user object will only work if theres id because of the extends
+//another example of generics
+console.log('more advanced GENERIC EXAMPLE ');
+const getUsersProperties = (users, key) => {
+    return users.map((user) => user[key]);
+};
+const userArray = [
+    {
+        id: 2,
+        phone: '0701476555',
+        email: 'ivanyan@gmail.com',
+        location: 'kibuye'
+    }
+];
+console.log(getUsersProperties(userArray, "email")); // result: ['ivanyan@gmail.com']
+//therethis function can be used to show the properties of an attribute that you want to access
+console.log('more more advanced GENERIC EXAMPLE ');
+class StateObj {
+    constructor(value) {
+        this.data = value;
+    }
+    get state() {
+        return this.data;
+    }
+    set state(value) {
+        if (value) {
+            this.data = value;
+        }
+    }
 }
-printhellworld();
+const store = new StateObj('open');
+store.state = 'closed';
+console.log(store.state);
+//+++++++++++++++++++++++++++++++++++++++++ Utility types ++++++++++++++++++++++++++++++++++++++++

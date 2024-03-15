@@ -75,32 +75,33 @@ class Coder {
 
   // constructor(public readonly name: String, private age: number, protected location: string) {
 
-  constructor( name: String, age: number, location: string) {
+  constructor(name: String, age: number, location: string) {
     this.name = name;
     this.age = age;
     this.location = location;
   }
 }
 
-
-let coder = new Coder("ivan", 23, "kajj")
-
+let coder = new Coder("ivan", 23, "kajj");
 
 class WebDev extends Coder {
-  
-  constructor(public name:string, age: number, location:string, public laptopbrand:string ) {
-    super(name, age, location)
-    this.laptopbrand = laptopbrand
+  constructor(
+    public name: string,
+    age: number,
+    location: string,
+    public laptopbrand: string
+  ) {
+    super(name, age, location);
+    this.laptopbrand = laptopbrand;
   }
 }
-
 
 //+++++++++++++++++++++++++++++++++++++++++ implementing an interface to a class
 
 interface Musician {
-  name: string
-  instrument: string
-  play(actionn: string) : string
+  name: string;
+  instrument: string;
+  play(actionn: string): string;
 }
 
 ////////////////////////////////////////////////////////
@@ -109,36 +110,35 @@ class Keyboardist implements Musician {
   name: string;
   instrument: string;
   play(actionn: string): string {
-    return `${this.name} ${actionn} ${this.instrument}`
+    return `${this.name} ${actionn} ${this.instrument}`;
   }
 
-  constructor(name:string, instrument:string, ) {
-    this.name= name
-    this.instrument = instrument
+  constructor(name: string, instrument: string) {
+    this.name = name;
+    this.instrument = instrument;
   }
 }
 
 ///////////////////////////////////////////////////////////
 
-const Page = new Keyboardist('mukisa', 'keyboard')
-console.log(Page.play('hits'));
-
+const Page = new Keyboardist("mukisa", "keyboard");
+console.log(Page.play("hits"));
 
 class Peeps {
-  static count: number = 0;  //static means that we can only call count after referencing this class forexample Peeps.count
+  static count: number = 0; //static means that we can only call count after referencing this class forexample Peeps.count
   static getCount(): number {
-    return Peeps.count
+    return Peeps.count;
   }
-  public id: number 
+  public id: number;
   constructor(public name: string) {
-    this.name = name
-    this.id = ++Peeps.count
+    this.name = name;
+    this.id = ++Peeps.count;
   }
 }
 
-let John = new Peeps("John")
-let Lenon = new Peeps("John")
-let Bill = new Peeps("John")
+let John = new Peeps("John");
+let Lenon = new Peeps("John");
+let Bill = new Peeps("John");
 
 console.log(John.id);
 console.log(Peeps.count);
@@ -146,32 +146,30 @@ console.log(Peeps.count);
 ///////////////////////////////////////////////////////////
 
 class Bands {
-  private datastate: string[]
+  private datastate: string[];
   constructor() {
-    this.datastate = []
+    this.datastate = [];
   }
 
-  public get data():string[] {
-    return this.datastate
+  public get data(): string[] {
+    return this.datastate;
   }
 
-  public set data(value:string[]) {
-    if (Array.isArray(value) && value.every(el => typeof el === 'string')) {
-      this.datastate = value
-      return
+  public set data(value: string[]) {
+    if (Array.isArray(value) && value.every((el) => typeof el === "string")) {
+      this.datastate = value;
+      return;
     } else {
-      throw new Error("some values in this array are not strings")
+      throw new Error("some values in this array are not strings");
     }
   }
 }
 
-const MyBands = new Bands()
-MyBands.data = ['goo', 'lee', 'goo'] // -------------->setter
-console.log(MyBands.data);    // --------------> getter
-MyBands.data = [...MyBands.data, 'sisis']
+const MyBands = new Bands();
+MyBands.data = ["goo", "lee", "goo"]; // -------------->setter
+console.log(MyBands.data); // --------------> getter
+MyBands.data = [...MyBands.data, "sisis"];
 console.log(MyBands.data);
-
-
 
 //+++++++++++++++++++++++++++++++++++++++++ index signatures and key of assertions
 
@@ -186,45 +184,45 @@ interface TransactionObj {
 */
 
 interface TransactionObj {
-  [index: string] : number
+  [index: string]: number;
 }
 
 const todaysTransactions: TransactionObj = {
   Pizza: 10,
   Books: 10,
-  Job: 20
-}
+  Job: 20,
+};
 
-let prop: string = 'Pizza'
+let prop: string = "Pizza";
 console.log(todaysTransactions[prop]);
 
 function todaysNet(transactions: TransactionObj) {
-  let total = 0
+  let total = 0;
   for (const transaction in transactions) {
-   total += transactions[transaction]
+    total += transactions[transaction];
   }
-  return total
+  return total;
 }
 console.log(todaysNet(todaysTransactions));
 
-//chaging the property of the object forexample 
-todaysTransactions.Pizza = 20
+//chaging the property of the object forexample
+todaysTransactions.Pizza = 20;
 console.log(todaysTransactions);
 
 ////////////////
 
 interface Student {
-  [key: string]: number | string  | number[] | undefined
-  name: string
-  gpa: number
-  classes?: number[]
+  [key: string]: number | string | number[] | undefined;
+  name: string;
+  gpa: number;
+  classes?: number[];
 }
 
 const student1: Student = {
-  name: 'ivan',
+  name: "ivan",
   gpa: 2,
-  classes: [1,2]
-}
+  classes: [1, 2],
+};
 
 for (const key in student1) {
   console.log(`${key}: ${student1[key as keyof Student]}`);
@@ -232,13 +230,12 @@ for (const key in student1) {
 
 Object.keys(student1).map((key) => {
   console.log(student1[key as keyof typeof student1]);
-})
-
+});
 
 ////////////////////////////////////////////////////////////////////////////
 
-type Streams = 'salary' | 'bonus' | 'sidehustle'
-type Incomes = Record<Streams, number | string>
+type Streams = "salary" | "bonus" | "sidehustle";
+type Incomes = Record<Streams, number | string>;
 
 /* means that all the streams ive mentioned above can be number or string 
 intead of 
@@ -251,31 +248,90 @@ const monthlyIncomes: Incomes = {
   salary: 500,
   bonus: 100,
   sidehustle: 250,
-}
+};
 
 for (const key in monthlyIncomes) {
-  console.log(monthlyIncomes[key as keyof typeof monthlyIncomes]); 
-  // OR console.log(monthlyIncomes[key as keyof  Incomes]); 
+  console.log(monthlyIncomes[key as keyof typeof monthlyIncomes]);
+  // OR console.log(monthlyIncomes[key as keyof  Incomes]);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++ Generics ++++++++++++++++++++++++++++++++++++++++
 
-//forexmaple 
-const stringEcho = <T>(abs: T): T => abs
+//forexmaple
+const stringEcho = <T>(abs: T): T => abs;
 
 const isObj = <T>(arg: T): boolean => {
-  const nextans = (Array.isArray(arg))
+  const nextans = Array.isArray(arg);
   console.log(nextans);
-  return nextans
-}
+  return nextans;
+};
 // isObj({name: "ivan"})
 
-const istrue = <T>(arg: T): { arg: T, is: boolean } => {
-  let answer = { arg, is: !!arg }
+const istrue = <T>(arg: T): { arg: T; is: boolean } => {
+  let answer = { arg, is: !!arg }; // !! shifts from what ever is given to either 0 or 1
   console.log(answer);
-  return answer
+  return answer;
+};
+istrue(0 && 1);
+
+//sung extends keyword
+interface HasId {
+  id: number;
 }
-istrue(0 && 1)
+
+const processUser = <T extends HasId>(user: T): T => {
+  return user;
+};
+
+console.log(processUser({ id: 1, name: "ivan" }));
+//in the above the user object will only work if theres id because of the extends
+
+//another example of generics
+console.log('more advanced GENERIC EXAMPLE ');
 
 
+const getUsersProperties = <T extends HasId, K extends keyof T>(
+  users: T[],
+  key: K
+): T[K][] => {
+  return users.map((user) => user[key]);
+};
+
+const userArray = [
+  {
+    id: 2,
+    phone: '0701476555',
+    email: 'ivanyan@gmail.com',
+    location: 'kibuye'
+  }
+];
+
+console.log(getUsersProperties(userArray, "email")) // result: ['ivanyan@gmail.com']
+//therethis function can be used to show the properties of an attribute that you want to access
+
+console.log('more more advanced GENERIC EXAMPLE ');
+
+class StateObj<T> {
+  private data: T
+  constructor(value :T) {
+    this.data = value
+  }
+
+  get state (): T {
+    return this.data
+  }
+
+  set state(value:T) {
+    if (value) {
+      this.data = value
+    }
+  }
+}
+
+const store = new StateObj('open')
+store.state = 'closed'
+console.log(store.state)
+
+
+//+++++++++++++++++++++++++++++++++++++++++ Utility types ++++++++++++++++++++++++++++++++++++++++
 
