@@ -1,4 +1,5 @@
 // +++++++++++++++++++++++++++++++++++++++++++++ declaring variables ++++++++++++++++++++++++++++++++
+console.log("DECLARING VARIABLES");
 
 let username = "ivan";
 let myName = "ivan";
@@ -13,6 +14,7 @@ console.log(a * b);
 console.log(username);
 
 // +++++++++++++++++++++++++++++++++++++++++++++    functions ++++++++++++++++++++++++++++++++
+console.log("FUNCTIONS");
 
 function sum(c: number, d: number): number {
   let answer = c + d;
@@ -22,6 +24,7 @@ function sum(c: number, d: number): number {
 sum(2, 3);
 
 // +++++++++++++++++++++++++++++++++++++++++++++ arrays sets and tuples  ++++++++++++++++++++++++++++++++
+console.log("SETS ARRAYS AND TUPLES");
 
 let stringArr = ["w", "i", "n"];
 stringArr.unshift("someone");
@@ -29,7 +32,8 @@ console.log(stringArr);
 let arr: string[] = [];
 arr.push();
 
-// +++++++++++++++++++++++++++++++++++++++++objects something like models
+// +++++++++++++++++++++++++++++++++++++++++objects something like models ++++++++++++++++++++++++++++
+console.log("OBJECTS.. STUFF LIKE MODELS");
 
 interface Developer {
   name: string;
@@ -48,7 +52,9 @@ function greetdeveloper(developer: Developer) {
 }
 greetdeveloper(dev1);
 
-///  +++++++++++++++++++++++++++++++++++++++++ Enums
+///  +++++++++++++++++++++++++++++++++++++++++ Enums ++++++++++++++++++++++++++
+console.log("ENUMS");
+
 enum Grade {
   A,
   B,
@@ -56,7 +62,8 @@ enum Grade {
   D,
 }
 
-// +++++++++++++++++++++++++++++++++++++++++type assertions /type casting
+// +++++++++++++++++++++++++++++++++++++++++type assertions /type casting+++++++++++++
+console.log("ASSERTIONS AND TYPE CASTING");
 
 type one = string;
 type two = string | number;
@@ -66,7 +73,8 @@ let y: one = "hello";
 let x = y as two; // example of assertion
 let z = <three>"main";
 
-//+++++++++++++++++++++++++++++++++++++++++ classes
+//+++++++++++++++++++++++++++++++++++++++++ classes ++++++++++++++++++++++++++++++++++
+console.log("CLASSES");
 
 class Coder {
   name: String;
@@ -96,7 +104,8 @@ class WebDev extends Coder {
   }
 }
 
-//+++++++++++++++++++++++++++++++++++++++++ implementing an interface to a class
+//+++++++++++++++++++++++++++++++++++++++++ implementing an interface to a class ++++++++++++++++++++
+console.log("IMPLEMENTING INTERFACES TO CLASSES");
 
 interface Musician {
   name: string;
@@ -171,7 +180,8 @@ console.log(MyBands.data); // --------------> getter
 MyBands.data = [...MyBands.data, "sisis"];
 console.log(MyBands.data);
 
-//+++++++++++++++++++++++++++++++++++++++++ index signatures and key of assertions
+//+++++++++++++++++++++++++++++++++++++++++ index signatures and key of assertions +++++++++++++++++++++++++++++++
+console.log("INDEX SIGNATURES AND KEY OF ASSERTIONS");
 
 //these are used when you are creating an object but you dont know the exact name of the object
 
@@ -256,6 +266,7 @@ for (const key in monthlyIncomes) {
 }
 
 //+++++++++++++++++++++++++++++++++++++++++ Generics ++++++++++++++++++++++++++++++++++++++++
+console.log("GENERICS");
 
 //forexmaple
 const stringEcho = <T>(abs: T): T => abs;
@@ -287,8 +298,7 @@ console.log(processUser({ id: 1, name: "ivan" }));
 //in the above the user object will only work if theres id because of the extends
 
 //another example of generics
-console.log('more advanced GENERIC EXAMPLE ');
-
+console.log("more advanced GENERIC EXAMPLE ");
 
 const getUsersProperties = <T extends HasId, K extends keyof T>(
   users: T[],
@@ -300,38 +310,165 @@ const getUsersProperties = <T extends HasId, K extends keyof T>(
 const userArray = [
   {
     id: 2,
-    phone: '0701476555',
-    email: 'ivanyan@gmail.com',
-    location: 'kibuye'
-  }
+    phone: "0701476555",
+    email: "ivanyan@gmail.com",
+    location: "kibuye",
+  },
 ];
 
-console.log(getUsersProperties(userArray, "email")) // result: ['ivanyan@gmail.com']
+console.log(getUsersProperties(userArray, "email")); // result: ['ivanyan@gmail.com']
 //therethis function can be used to show the properties of an attribute that you want to access
 
-console.log('more more advanced GENERIC EXAMPLE ');
+console.log("more more advanced GENERIC EXAMPLE ");
 
 class StateObj<T> {
-  private data: T
-  constructor(value :T) {
-    this.data = value
+  private data: T;
+  constructor(value: T) {
+    this.data = value;
   }
 
-  get state (): T {
-    return this.data
+  get state(): T {
+    return this.data;
   }
 
-  set state(value:T) {
+  set state(value: T) {
     if (value) {
-      this.data = value
+      this.data = value;
     }
   }
 }
 
-const store = new StateObj('open')
-store.state = 'closed'
-console.log(store.state)
-
+const store = new StateObj("open");
+store.state = "closed";
+console.log(store.state);
 
 //+++++++++++++++++++++++++++++++++++++++++ Utility types ++++++++++++++++++++++++++++++++++++++++
+console.log("UTILITY TYPES ");
 
+interface Assignment {
+  studentId: string;
+  title: string;
+  grade?: number;
+  verified?: boolean;
+}
+
+///////////////////////////////////////////// partial keyword
+
+const updateAssignment = (
+  assign: Assignment,
+  propsToUpdate: Partial<Assignment> // partial means we only use some of the assignment properties not all
+) => {
+  return { ...assign, ...propsToUpdate };
+};
+
+const assign1: Assignment = {
+  studentId: "12",
+  title: "pcmstudent",
+};
+
+console.log(updateAssignment(assign1, { title: "3" })); // changing the title to 3
+
+///////////////////////////////////////////// required keyword
+
+const recordAssignment = (assign: Required<Assignment>): Assignment => {
+  return assign;
+};
+///////////////////////////////////////////// read only keyword
+
+const assign2: Assignment = {
+  studentId: "09876,54321",
+  title: "math",
+  grade: 95,
+};
+const assignverified: Readonly<Assignment> = { ...assign2, verified: true };
+console.log(assignverified);
+
+/////////////////////////////////////////////  RECORD TYPE
+
+const hexColorMap: Record<string, string> = {
+  red: "FF0000",
+  green: "00FF00",
+  blue: "0000FF",
+};
+
+type Students = "Sara" | "Micheal" | "Drew";
+type LetterGrades = "A" | "B" | "C";
+
+const finalStudentGrades: Record<Students, LetterGrades> = {
+  Sara: "A",
+  Micheal: "B",
+  Drew: "C",
+};
+
+interface Grades {
+  assign1: number;
+  assign2: number;
+}
+
+const finalStudentGrades2: Record<Students, Grades> = {
+  Sara: { assign1: 45, assign2: 34 },
+  Micheal: { assign1: 45, assign2: 34 },
+  Drew: { assign1: 45, assign2: 34 },
+};
+
+/////////////////////////////// Pick and Omit
+// Pick
+type AssignmentResult = Pick<Assignment, "studentId" | "grade">;
+const score: AssignmentResult = {
+  studentId: "0987",
+  grade: 34,
+};
+
+//Omit
+type Omitter = Omit<Assignment, "studentId" | "grade">;
+const preview: Omitter = {
+  title: "final porject",
+  verified: false,
+};
+
+// Extract and Exclude
+type adjustableGrade = Exclude<LetterGrades, "A">;
+type highgradeGrade = Extract<LetterGrades, "A" | "B">;
+
+//nonnullable
+type AllPossibleGrades = "Dave" | "John" | null | undefined;
+type NamesOnly = NonNullable<AllPossibleGrades>;
+
+//return type  
+type newAssign = { title: string; points: number };
+const createNewAssign = (title: string, points: number): newAssign => {
+  return { title, points };
+};
+type secondNewAssign = ReturnType<typeof createNewAssign>;
+
+const tsAssign: secondNewAssign = createNewAssign("Utility types", 23);
+console.log(tsAssign);
+
+///////////////////Parameters
+
+type AssignParams = Parameters<typeof createNewAssign>;
+const assginArgs: AssignParams = ["Generics", 100];
+const tsAssign2 = createNewAssign(...assginArgs);
+console.log(tsAssign2);
+
+/////////////////// Awaited utility
+
+interface User {
+  id: number,
+  name: string,
+  usernmae: string,
+  email: string,
+}
+
+const fetchUsers = async (): Promise<User[]> => {
+  const data = await fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => res.json())
+    .catch((err) => { 
+      if (err instanceof Error) console.log(`Error: ${err.message}`);
+    }); 
+  console.log(data);
+  return data
+};
+type FetchUsersReturnType = Awaited<ReturnType<typeof fetchUsers>>
+fetchUsers()
+// fetchUsers().then(data => console.log(data)); 
