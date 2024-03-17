@@ -94,7 +94,7 @@ let coder = new Coder("ivan", 23, "kajj");
 
 class WebDev extends Coder {
   constructor(
-    public name: string,
+    public name: string ,
     age: number,
     location: string,
     public laptopbrand: string
@@ -122,7 +122,7 @@ class Keyboardist implements Musician {
     return `${this.name} ${actionn} ${this.instrument}`;
   }
 
-  constructor(name: string, instrument: string) {
+  constructor(name: string = '', instrument: string) {
     this.name = name;
     this.instrument = instrument;
   }
