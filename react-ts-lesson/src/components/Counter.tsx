@@ -13,6 +13,7 @@ export default function Counter() {
     <>
       <h1>the count is {count}</h1>
       <button onClick= {() => setCount(prevc => prevc+1)}>+</button>
+      <button onClick= {incrementcount}>+</button>
     </>
 
       )
