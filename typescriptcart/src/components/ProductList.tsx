@@ -13,7 +13,7 @@ const ProductList = () => {
 
   if (products?.length) {
     pageContent = products.map(product => {
-      const incart = cart.some(item => item.sku === product.sku)
+      const incart:boolean = cart.some(item => item.sku === product.sku)
 
     return (
       <Product
@@ -27,7 +27,7 @@ const ProductList = () => {
     })   
   }
 
-  const content = <main className="main--products">
+  const content = <main className="main main--products">
     {pageContent}
   </main>
 

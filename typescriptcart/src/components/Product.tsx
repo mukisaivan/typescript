@@ -1,19 +1,20 @@
 import { ReactElement } from "react"
 import { ProductType } from "../context/ProductsProvider"
-import {  ReducerActionType } from "../context/CartProvider"
+import {  ReducerAction, ReducerActionType } from "../context/CartProvider"
 
 type PropsType = {
   product: ProductType,
-  dispatch: any
+  dispatch: React.Dispatch<ReducerAction>
   REDUCER_ACTIONS: ReducerActionType
   incart: boolean
 }
 
 const Product = ({product, dispatch, REDUCER_ACTIONS, incart}: PropsType): ReactElement => {
   
-  const img:string = new URL(`../images/${product.sku}.png`, import.meta.url).href
+  const img: string = new URL(`../images/${product.sku}.png`, import.meta.url).href
+  // console.log(img);
   
-  const onAddTOCart = () => dispatch( { type: REDUCER_ACTIONS.ADD, payload: {...product, qty: 1} } )
+  const onAddTOCart = () => dispatch( { type: REDUCER_ACTIONS.ADD, payLoad: {...product, qty: 1} } )
   
   const itemInCart = incart ? ' -> Item in cart: ✅' : null
 

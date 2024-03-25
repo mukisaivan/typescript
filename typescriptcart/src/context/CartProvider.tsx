@@ -1,6 +1,6 @@
 import { ReactElement, createContext, useMemo, useReducer } from "react"
 
-type CartItemType = {
+export type CartItemType = {
   sku: string,
   name: string,
   price: number,
@@ -25,11 +25,12 @@ const REDUCER_ACTION_TYPE = {
 export type ReducerActionType = typeof REDUCER_ACTION_TYPE
 
 export type ReducerAction = {
-  type: string
-  payLoad?: CartItemType
+  type: string   // this helps to define the action type 
+  payLoad?: CartItemType    //paylaod is the data that is to be worked on and in this case it is the cart item type
 }
 
 const reducer = (state: CartStateType, action: ReducerAction): CartStateType => {
+  
   
   switch (action.type) {
     case REDUCER_ACTION_TYPE.ADD: {
@@ -65,19 +66,16 @@ const reducer = (state: CartStateType, action: ReducerAction): CartStateType => 
       const { sku, qty } = action.payLoad
       const itemExists = state.cart.find(item => item.sku === sku);
       
-      if (!itemExists) throw new Error("Item should be in cart to be edited");
+      if (!itemExists) {throw new Error("Item should be in cart to be edited")};
  
       const updatedItem = {...itemExists, qty}
       
-      const filteredItems = state.cart.filter(item => item.sku !== sku)
+      const filteredItems = state.cart.filter(item => item.sku !== sku)  // here filtered items are obtained in order to get the other items that are not being worked on 
      
-      return { ...state, cart: [...filteredItems, updatedItem] }
+      return { ...state, cart: [...filteredItems, updatedItem] }   // the already existing items are spread into the array and the updated item is also included
     }
     
     case REDUCER_ACTION_TYPE.SUBMIT: {
-      if (!action.payLoad) {
-        throw new Error('action.payload missing in SUBMIT action')
-      }
       return {...state, cart: []}
     }
   
@@ -98,7 +96,7 @@ export const useCartContex = (initState: CartStateType) => {
   const totalItems = state.cart.reduce((prevValue, cartItem) => {
     return  prevValue + cartItem.qty
   }, 0)
-
+  
   const totalPrice =
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
       state.cart.reduce((prevValue, cartItem) => {
